@@ -1,26 +1,32 @@
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
  * This represents the heart of the browser: the collections
  * that organize all the URLs into useful structures.
- * 
+ *
  * @author Robert C. Duvall
  */
 public class BrowserModel {
     // constants
     public static final String PROTOCOL_PREFIX = "http://";
     // state
+    private String errors = "resources/Errors.properties";
     private URL myHome;
     private URL myCurrentURL;
     private int myCurrentIndex;
     private List<URL> myHistory;
     private Map<String, URL> myFavorites;
+    private ResourceBundle myErrorResources;
+
+
+    public class BrowserException extends RuntimeException {
+        public BrowserException(String message) {
+            super(message);
+        }
+    }
 
 
     /**
@@ -32,6 +38,7 @@ public class BrowserModel {
         myCurrentIndex = -1;
         myHistory = new ArrayList<>();
         myFavorites = new HashMap<>();
+        //myErrorResources = ResourceBundle.getBundle(errors);
     }
 
     /**
@@ -53,7 +60,7 @@ public class BrowserModel {
             myCurrentIndex--;
             return myHistory.get(myCurrentIndex);
         }
-        return null;
+        throw new BrowserException("URL Error");
     }
 
     /**

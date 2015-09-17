@@ -65,6 +65,7 @@ public class BrowserView {
     private ComboBox<String> myFavorites;
     // get strings from resource file
     private ResourceBundle myResources;
+
     // the data
     private BrowserModel myModel;
 
@@ -75,6 +76,7 @@ public class BrowserView {
         myModel = model;
         // use resources for labels
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+
         BorderPane root = new BorderPane();
         // must be first since other panels may refer to page
         root.setCenter(makePageDisplay());
